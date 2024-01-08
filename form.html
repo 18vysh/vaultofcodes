@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: rgb(242, 242, 242);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(250, 250, 250, 0.1);
+            padding: 20px;
+            width: 300px;
+            max-width: 100%;
+        }
+
+        h1 {
+            color: #c00000;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input,select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="checkbox"] {
+            width: 12px; 
+            height: 12px; 
+            margin: 2; 
+        }
+
+        input:hover,select:hover {
+            background-color: #ffdab9;
+        }
+
+        button {
+            background-color: #000000;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: rgb(237, 71, 0);
+        }
+
+        .terms-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .terms-checkbox {
+            margin-right: 3px;
+        }
+
+        .red-text {
+        color: rgb(133, 6, 6);
+        display: inline-block;
+        white-space: nowrap;
+        font-size: 13px;
+        margin-left: 5px; 
+        }
+
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            text-align: center;
+        }
+
+        .modal-close {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <form id="registrationForm">
+        <h1>Register Now!</h1>
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" required>
+
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" required>
+
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <label for="confirmPassword">Confirm Password:</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" required>
+
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" name="dob" required>
+
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender" required>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select>
+
+        <div class="terms-container">
+            <input type="checkbox" id="termsCheckbox" required class="terms-checkbox">
+            <label for="termsCheckbox" class="red-text">I agree to the Terms and Conditions</label>
+        </div>
+
+        <button type="button" onclick="validateAndSubmit()">Register</button>
+    </form>
+
+    
+    <div id="registrationModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="document.getElementById('registrationModal').style.display='none'">&times;</span>
+            <p id="registrationMessage"></p>
+        </div>
+    </div>
+
+    <script>
+        function validateAndSubmit() {
+            var firstName = document.getElementById("firstName").value;
+            var lastName = document.getElementById("lastName").value;
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirmPassword").value;
+            var dob = document.getElementById("dob").value;
+            var gender = document.getElementById("gender").value;
+            var termsCheckbox = document.getElementById("termsCheckbox").checked;
+
+            if (firstName === "" || lastName === "" || email === "" || password === "" || confirmPassword === "" || dob === "" || gender === "" || !termsCheckbox) {
+                document.getElementById("registrationMessage").innerHTML = "Please fill in all details.";
+            } else if (password !== confirmPassword) {
+                document.getElementById("registrationMessage").innerHTML = "Passwords do not match.";
+            } else {
+                document.getElementById("registrationMessage").innerHTML = "Registration completed &#10004;";
+            }
+
+            document.getElementById('registrationModal').style.display = 'block';
+        }
+    </script>
+</body>
+
+</html>
